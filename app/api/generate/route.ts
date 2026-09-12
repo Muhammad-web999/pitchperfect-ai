@@ -49,7 +49,7 @@ VARIANT 3 — [The Curious Expert]:
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: model: 'llama-3.3-70b-versatile',
+        model: model: 'wllama-3.1-8b-instant',
         messages: [{ role: 'user', content: prompt }],
         temperature: 0.7,
         max_tokens: 1500,
