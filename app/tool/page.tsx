@@ -1,10 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
 
 export default function ToolPage() {
   const [jobDesc, setJobDesc] = useState('');
@@ -46,112 +42,106 @@ export default function ToolPage() {
     }
   };
 
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(result);
+    alert('Copied to clipboard!');
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 p-6">
+    <div className="min-h-screen bg-slate-950 text-slate-100 p-6 font-sans">
       <div className="max-w-4xl mx-auto space-y-8">
         <div className="text-center space-y-2">
           <h1 className="text-3xl font-bold text-white">PitchPerfect AI</h1>
           <p className="text-slate-400">Internal Tool — Generate winning proposals in seconds</p>
         </div>
 
-        <Card className="bg-slate-900 border-slate-800">
-          <CardHeader>
-            <CardTitle>Job Details</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-6">
+          <h2 className="text-xl font-semibold text-white">Job Details</h2>
+          
+          <div className="space-y-2">
+            <label className="block text-sm font-medium text-slate-300">Job Description (paste from Upwork)</label>
+            <textarea
+              placeholder="Paste the full job description here..."
+              value={jobDesc}
+              onChange={(e) => setJobDesc(e.target.value)}
+              className="w-full min-h-[200px] p-3 rounded-lg bg-slate-950 border border-slate-700 text-white placeholder-slate-600 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="space-y-2">
-              <Label>Job Description (paste from Upwork)</Label>
-              <Textarea
-                placeholder="Paste the full job description here..."
-                value={jobDesc}
-                onChange={(e) => setJobDesc(e.target.value)}
-                className="min-h-[200px] bg-slate-950 border-slate-700 text-white"
-              />
+              <label className="block text-sm font-medium text-slate-300">Niche</label>
+              <select 
+                value={niche} 
+                onChange={(e) => setNiche(e.target.value)}
+                className="w-full p-3 rounded-lg bg-slate-950 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              >
+                <option>React / Next.js</option>
+                <option>WordPress</option>
+                <option>Shopify / E-commerce</option>
+                <option>Full-Stack (Node.js)</option>
+                <option>Frontend (HTML/CSS/JS)</option>
+                <option>Web Design</option>
+              </select>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="space-y-2">
-                <Label>Niche</Label>
-                <select 
-                  value={niche} 
-                  onChange={(e) => setNiche(e.target.value)}
-                  className="w-full p-2 rounded-md bg-slate-950 border border-slate-700 text-white"
-                >
-                  <option>React / Next.js</option>
-                  <option>WordPress</option>
-                  <option>Shopify / E-commerce</option>
-                  <option>Full-Stack (Node.js)</option>
-                  <option>Frontend (HTML/CSS/JS)</option>
-                  <option>Web Design</option>
-                </select>
-              </div>
-
-              <div className="space-y-2">
-                <Label>Experience</Label>
-                <select 
-                  value={experience} 
-                  onChange={(e) => setExperience(e.target.value)}
-                  className="w-full p-2 rounded-md bg-slate-950 border border-slate-700 text-white"
-                >
-                  <option>Beginner (0-1 years)</option>
-                  <option>Intermediate (2-4 years)</option>
-                  <option>Expert (5+ years)</option>
-                </select>
-              </div>
-
-              <div className="space-y-2">
-                <Label>Tone</Label>
-                <select 
-                  value={tone} 
-                  onChange={(e) => setTone(e.target.value)}
-                  className="w-full p-2 rounded-md bg-slate-950 border border-slate-700 text-white"
-                >
-                  <option>Professional</option>
-                  <option>Casual</option>
-                  <option>Bold</option>
-                </select>
-              </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-slate-300">Experience</label>
+              <select 
+                value={experience} 
+                onChange={(e) => setExperience(e.target.value)}
+                className="w-full p-3 rounded-lg bg-slate-950 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              >
+                <option>Beginner (0-1 years)</option>
+                <option>Intermediate (2-4 years)</option>
+                <option>Expert (5+ years)</option>
+              </select>
             </div>
 
-            <Button 
-              onClick={generateProposals} 
-              disabled={loading}
-              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-6"
-            >
-              {loading ? 'Writing your proposals...' : 'Generate 3 Proposals'}
-            </Button>
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-slate-300">Tone</label>
+              <select 
+                value={tone} 
+                onChange={(e) => setTone(e.target.value)}
+                className="w-full p-3 rounded-lg bg-slate-950 border border-slate-700 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+              >
+                <option>Professional</option>
+                <option>Casual</option>
+                <option>Bold</option>
+              </select>
+            </div>
+          </div>
 
-            {error && (
-              <div className="p-4 bg-red-900/30 border border-red-800 rounded-md text-red-300">
-                {error}
-              </div>
-            )}
-          </CardContent>
-        </Card>
+          <button 
+            onClick={generateProposals} 
+            disabled={loading}
+            className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-emerald-800 disabled:cursor-not-allowed text-white font-semibold py-4 rounded-lg transition-colors"
+          >
+            {loading ? 'Writing your proposals...' : 'Generate 3 Proposals'}
+          </button>
+
+          {error && (
+            <div className="p-4 bg-red-900/30 border border-red-800 rounded-lg text-red-300">
+              {error}
+            </div>
+          )}
+        </div>
 
         {result && (
-          <Card className="bg-slate-900 border-slate-800">
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle>Your Proposals</CardTitle>
-              <Button 
-                variant="outline" 
-                size="sm"
-                onClick={() => copyToClipboard(result)}
-                className="border-slate-600 text-slate-300 hover:bg-slate-800"
+          <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-4">
+            <div className="flex items-center justify-between">
+              <h2 className="text-xl font-semibold text-white">Your Proposals</h2>
+              <button 
+                onClick={copyToClipboard}
+                className="px-4 py-2 rounded-lg border border-slate-600 text-slate-300 hover:bg-slate-800 transition-colors text-sm"
               >
                 Copy All
-              </Button>
-            </CardHeader>
-            <CardContent>
-              <div className="bg-slate-950 p-6 rounded-md border border-slate-800 whitespace-pre-wrap font-mono text-sm leading-relaxed text-slate-300">
-                {result}
-              </div>
-            </CardContent>
-          </Card>
+              </button>
+            </div>
+            <div className="bg-slate-950 p-6 rounded-lg border border-slate-800 whitespace-pre-wrap font-mono text-sm leading-relaxed text-slate-300">
+              {result}
+            </div>
+          </div>
         )}
       </div>
     </div>
