@@ -1,10 +1,8 @@
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import { CheckCircle, Zap, MessageSquare, Shield } from 'lucide-react';
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100">
+    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans">
       {/* Hero */}
       <section className="px-6 py-20 md:py-32 max-w-5xl mx-auto text-center space-y-8">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-900/30 border border-emerald-800 text-emerald-400 text-sm font-medium">
@@ -22,11 +20,11 @@ export default function LandingPage() {
           that get replies — not ignored. <span className="text-white font-semibold">$25. Delivered in 2 hours.</span>
         </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+        <div className="pt-4">
           <a href="YOUR_GUMROAD_LINK_HERE" target="_blank" rel="noopener noreferrer">
-            <Button className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-6 text-lg font-semibold">
+            <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-colors">
               Get My Proposals — $25
-            </Button>
+            </button>
           </a>
         </div>
         
@@ -39,29 +37,23 @@ export default function LandingPage() {
           <h2 className="text-3xl font-bold text-center text-white">How It Works</h2>
           
           <div className="grid md:grid-cols-3 gap-8">
-            <Card className="bg-slate-900 border-slate-800">
-              <CardContent className="pt-6 space-y-4">
-                <div className="w-12 h-12 rounded-full bg-emerald-900/30 flex items-center justify-center text-emerald-400 font-bold text-xl">1</div>
-                <h3 className="text-xl font-semibold text-white">Paste the Job</h3>
-                <p className="text-slate-400">Send me the Upwork job description or URL after payment.</p>
-              </CardContent>
-            </Card>
+            <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-4">
+              <div className="w-12 h-12 rounded-full bg-emerald-900/30 flex items-center justify-center text-emerald-400 font-bold text-xl">1</div>
+              <h3 className="text-xl font-semibold text-white">Paste the Job</h3>
+              <p className="text-slate-400">Send me the Upwork job description or URL after payment.</p>
+            </div>
 
-            <Card className="bg-slate-900 border-slate-800">
-              <CardContent className="pt-6 space-y-4">
-                <div className="w-12 h-12 rounded-full bg-emerald-900/30 flex items-center justify-center text-emerald-400 font-bold text-xl">2</div>
-                <h3 className="text-xl font-semibold text-white">AI + Human Edit</h3>
-                <p className="text-slate-400">My AI studies the client's tech stack. I lightly edit for perfection.</p>
-              </CardContent>
-            </Card>
+            <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-4">
+              <div className="w-12 h-12 rounded-full bg-emerald-900/30 flex items-center justify-center text-emerald-400 font-bold text-xl">2</div>
+              <h3 className="text-xl font-semibold text-white">AI + Human Edit</h3>
+              <p className="text-slate-400">My AI studies the client's tech stack. I lightly edit for perfection.</p>
+            </div>
 
-            <Card className="bg-slate-900 border-slate-800">
-              <CardContent className="pt-6 space-y-4">
-                <div className="w-12 h-12 rounded-full bg-emerald-900/30 flex items-center justify-center text-emerald-400 font-bold text-xl">3</div>
-                <h3 className="text-xl font-semibold text-white">Copy & Send</h3>
-                <p className="text-slate-400">You get 5 proposals in your inbox. Copy, paste, win the job.</p>
-              </CardContent>
-            </Card>
+            <div className="bg-slate-900 border border-slate-800 rounded-xl p-6 space-y-4">
+              <div className="w-12 h-12 rounded-full bg-emerald-900/30 flex items-center justify-center text-emerald-400 font-bold text-xl">3</div>
+              <h3 className="text-xl font-semibold text-white">Copy & Send</h3>
+              <p className="text-slate-400">You get 5 proposals in your inbox. Copy, paste, win the job.</p>
+            </div>
           </div>
         </div>
       </section>
@@ -108,9 +100,9 @@ export default function LandingPage() {
       {/* Pricing */}
       <section className="px-6 py-16 bg-slate-900/50">
         <div className="max-w-md mx-auto">
-          <Card className="bg-slate-900 border-emerald-800/50 relative overflow-hidden">
+          <div className="bg-slate-900 border border-emerald-800/50 rounded-xl relative overflow-hidden">
             <div className="absolute top-0 left-0 right-0 h-1 bg-emerald-500" />
-            <CardContent className="pt-8 pb-8 text-center space-y-6">
+            <div className="pt-8 pb-8 px-6 text-center space-y-6">
               <h3 className="text-2xl font-bold text-white">One-Time Purchase</h3>
               <div className="flex items-baseline justify-center gap-1">
                 <span className="text-5xl font-bold text-white">$25</span>
@@ -137,12 +129,12 @@ export default function LandingPage() {
               </ul>
 
               <a href="YOUR_GUMROAD_LINK_HERE" target="_blank" rel="noopener noreferrer" className="block">
-                <Button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-6 text-lg font-semibold">
+                <button className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-4 rounded-lg text-lg font-semibold transition-colors">
                   Get My Proposals — $25
-                </Button>
+                </button>
               </a>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         </div>
       </section>
 
