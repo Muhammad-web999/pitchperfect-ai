@@ -4,11 +4,11 @@ export async function POST(req: Request) {
   try {
     const { jobDesc, niche, experience, tone } = await req.json();
     
-    const apiKey = process.env.GROQ_API_KEY;
+    const apiKey = process.env.OPENROUTER_API_KEY;
     
     if (!apiKey) {
       return NextResponse.json(
-        { error: 'GROQ_API_KEY is missing. Check Vercel Environment Variables.' },
+        { error: 'OPENROUTER_API_KEY is missing. Check Vercel Environment Variables.' },
         { status: 500 }
       );
     }
@@ -41,14 +41,16 @@ VARIANT 2 — [The Proven Result]:
 VARIANT 3 — [The Curious Expert]:
 [Text]`;
 
-    const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
+        'HTTP-Referer': 'https://pitchperfect-ai.vercel.app',
+        'X-Title': 'PitchPerfect AI',
       },
       body: JSON.stringify({
-        model: 'llama-3.1-8b-instant',
+        model: 'meta-llama/llama-3.3-70b-instruct:free',
         messages: [{ role: 'user', content: prompt }],
         temperature: 0.7,
         max_tokens: 1500,
@@ -59,7 +61,7 @@ VARIANT 3 — [The Curious Expert]:
       const errorData = await response.json().catch(() => ({ message: 'Unknown error' }));
       const errorMessage = errorData.error?.message || errorData.message || JSON.stringify(errorData);
       return NextResponse.json(
-        { error: `Groq API Error (${response.status}): ${errorMessage}` },
+        { error: `OpenRouter Error (${response.status}): ${errorMessage}` },
         { status: 500 }
       );
     }
