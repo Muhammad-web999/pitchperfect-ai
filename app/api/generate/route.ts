@@ -6,10 +6,9 @@ export async function POST(req: Request) {
     
     const apiKey = process.env.GROQ_API_KEY;
     
-    // Check 1: Is the API key missing?
     if (!apiKey) {
       return NextResponse.json(
-        { error: 'GROQ_API_KEY is missing in Vercel Environment Variables. Go to Vercel → Project Settings → Environment Variables and add it.' },
+        { error: 'GROQ_API_KEY is missing. Check Vercel Environment Variables.' },
         { status: 500 }
       );
     }
@@ -49,18 +48,16 @@ VARIANT 3 — [The Curious Expert]:
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'wllama-3.1-8b-instant',
+        model: 'llama-3.1-8b-instant',
         messages: [{ role: 'user', content: prompt }],
         temperature: 0.7,
         max_tokens: 1500,
       }),
     });
 
-    // Check 2: Did Groq return an error?
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({ message: 'Unknown error' }));
       const errorMessage = errorData.error?.message || errorData.message || JSON.stringify(errorData);
-      
       return NextResponse.json(
         { error: `Groq API Error (${response.status}): ${errorMessage}` },
         { status: 500 }
